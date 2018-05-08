@@ -7,14 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0522CF520A19C4D00EF5923 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0522CF420A19C4D00EF5923 /* Logger.swift */; };
+		A0522CFA20A1A22800EF5923 /* CTURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0522CF920A1A22800EF5923 /* CTURLRequest.swift */; };
+		A0522CFC20A1AC9200EF5923 /* CTServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0522CFB20A1AC9200EF5923 /* CTServiceFactory.swift */; };
+		A0522D0120A1BDA000EF5923 /* DemoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0522D0020A1BDA000EF5923 /* DemoService.swift */; };
 		A0AC752420A0A0AD00DDAF44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC752320A0A0AD00DDAF44 /* AppDelegate.swift */; };
 		A0AC752620A0A0AD00DDAF44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC752520A0A0AD00DDAF44 /* ViewController.swift */; };
 		A0AC752920A0A0AD00DDAF44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0AC752720A0A0AD00DDAF44 /* Main.storyboard */; };
 		A0AC752B20A0A0AD00DDAF44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0AC752A20A0A0AD00DDAF44 /* Assets.xcassets */; };
 		A0AC752E20A0A0AD00DDAF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0AC752C20A0A0AD00DDAF44 /* LaunchScreen.storyboard */; };
+		A0AC753A20A0ACD100DDAF44 /* CTURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC753920A0ACD100DDAF44 /* CTURLResponse.swift */; };
+		A0AC753C20A145B100DDAF44 /* CTCacheCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC753B20A145B100DDAF44 /* CTCacheCenter.swift */; };
+		A0AC754020A1463E00DDAF44 /* CTDiskCacheCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC753F20A1463E00DDAF44 /* CTDiskCacheCenter.swift */; };
+		A0AC754220A1465B00DDAF44 /* CTMemoryCacheDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC754120A1465B00DDAF44 /* CTMemoryCacheDataCenter.swift */; };
+		A0AC754520A15CB700DDAF44 /* CTMemoryCacheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC754420A15CB700DDAF44 /* CTMemoryCacheRecord.swift */; };
+		A0AC754720A16BCF00DDAF44 /* CTNetworkingDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC754620A16BCF00DDAF44 /* CTNetworkingDefines.swift */; };
+		A0AC754A20A16C4C00DDAF44 /* CTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC754920A16C4C00DDAF44 /* CTServiceProtocol.swift */; };
+		A0AC754D20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC754C20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0522CF420A19C4D00EF5923 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		A0522CF920A1A22800EF5923 /* CTURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTURLRequest.swift; sourceTree = "<group>"; };
+		A0522CFB20A1AC9200EF5923 /* CTServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTServiceFactory.swift; sourceTree = "<group>"; };
+		A0522D0020A1BDA000EF5923 /* DemoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoService.swift; sourceTree = "<group>"; };
 		A0AC752020A0A0AD00DDAF44 /* CTNetworking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTNetworking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0AC752320A0A0AD00DDAF44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0AC752520A0A0AD00DDAF44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +38,14 @@
 		A0AC752A20A0A0AD00DDAF44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0AC752D20A0A0AD00DDAF44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0AC752F20A0A0AD00DDAF44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0AC753920A0ACD100DDAF44 /* CTURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTURLResponse.swift; sourceTree = "<group>"; };
+		A0AC753B20A145B100DDAF44 /* CTCacheCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCacheCenter.swift; sourceTree = "<group>"; };
+		A0AC753F20A1463E00DDAF44 /* CTDiskCacheCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTDiskCacheCenter.swift; sourceTree = "<group>"; };
+		A0AC754120A1465B00DDAF44 /* CTMemoryCacheDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTMemoryCacheDataCenter.swift; sourceTree = "<group>"; };
+		A0AC754420A15CB700DDAF44 /* CTMemoryCacheRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTMemoryCacheRecord.swift; sourceTree = "<group>"; };
+		A0AC754620A16BCF00DDAF44 /* CTNetworkingDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTNetworkingDefines.swift; sourceTree = "<group>"; };
+		A0AC754920A16C4C00DDAF44 /* CTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTServiceProtocol.swift; sourceTree = "<group>"; };
+		A0AC754C20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+NetworkingMethods.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +59,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0522CF320A19C2C00EF5923 /* LogComponents */ = {
+			isa = PBXGroup;
+			children = (
+				A0522CF420A19C4D00EF5923 /* Logger.swift */,
+			);
+			path = LogComponents;
+			sourceTree = "<group>";
+		};
+		A0522CF820A1A20400EF5923 /* CTURLRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A0522CF920A1A22800EF5923 /* CTURLRequest.swift */,
+			);
+			path = CTURLRequest;
+			sourceTree = "<group>";
+		};
+		A0522CFD20A1BD6A00EF5923 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				A0522CFF20A1BD8A00EF5923 /* DemoService */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		A0522CFF20A1BD8A00EF5923 /* DemoService */ = {
+			isa = PBXGroup;
+			children = (
+				A0522D0020A1BDA000EF5923 /* DemoService.swift */,
+			);
+			path = DemoService;
+			sourceTree = "<group>";
+		};
 		A0AC751720A0A0AD00DDAF44 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +110,8 @@
 		A0AC752220A0A0AD00DDAF44 /* CTNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				A0522CFD20A1BD6A00EF5923 /* Demo */,
+				A0AC753520A0A9A500DDAF44 /* CTNetworking */,
 				A0AC752320A0A0AD00DDAF44 /* AppDelegate.swift */,
 				A0AC752520A0A0AD00DDAF44 /* ViewController.swift */,
 				A0AC752720A0A0AD00DDAF44 /* Main.storyboard */,
@@ -62,6 +120,88 @@
 				A0AC752F20A0A0AD00DDAF44 /* Info.plist */,
 			);
 			path = CTNetworking;
+			sourceTree = "<group>";
+		};
+		A0AC753520A0A9A500DDAF44 /* CTNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC754B20A18B6500DDAF44 /* Categories */,
+				A0AC754820A16C3300DDAF44 /* Services */,
+				A0AC753720A0AC8A00DDAF44 /* Components */,
+				A0AC753620A0A9DE00DDAF44 /* CacheComponents */,
+				A0AC754620A16BCF00DDAF44 /* CTNetworkingDefines.swift */,
+			);
+			path = CTNetworking;
+			sourceTree = "<group>";
+		};
+		A0AC753620A0A9DE00DDAF44 /* CacheComponents */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC753B20A145B100DDAF44 /* CTCacheCenter.swift */,
+				A0AC753E20A1461700DDAF44 /* DiskCacheDataCenter */,
+				A0AC753D20A145F200DDAF44 /* MemoryCacheDataCenter */,
+			);
+			path = CacheComponents;
+			sourceTree = "<group>";
+		};
+		A0AC753720A0AC8A00DDAF44 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0522CF820A1A20400EF5923 /* CTURLRequest */,
+				A0522CF320A19C2C00EF5923 /* LogComponents */,
+				A0AC753820A0AC9D00DDAF44 /* CTURLResponse */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A0AC753820A0AC9D00DDAF44 /* CTURLResponse */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC753920A0ACD100DDAF44 /* CTURLResponse.swift */,
+			);
+			path = CTURLResponse;
+			sourceTree = "<group>";
+		};
+		A0AC753D20A145F200DDAF44 /* MemoryCacheDataCenter */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC754320A15C8600DDAF44 /* MemoryCacheRecord */,
+				A0AC754120A1465B00DDAF44 /* CTMemoryCacheDataCenter.swift */,
+			);
+			path = MemoryCacheDataCenter;
+			sourceTree = "<group>";
+		};
+		A0AC753E20A1461700DDAF44 /* DiskCacheDataCenter */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC753F20A1463E00DDAF44 /* CTDiskCacheCenter.swift */,
+			);
+			path = DiskCacheDataCenter;
+			sourceTree = "<group>";
+		};
+		A0AC754320A15C8600DDAF44 /* MemoryCacheRecord */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC754420A15CB700DDAF44 /* CTMemoryCacheRecord.swift */,
+			);
+			path = MemoryCacheRecord;
+			sourceTree = "<group>";
+		};
+		A0AC754820A16C3300DDAF44 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC754920A16C4C00DDAF44 /* CTServiceProtocol.swift */,
+				A0522CFB20A1AC9200EF5923 /* CTServiceFactory.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A0AC754B20A18B6500DDAF44 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A0AC754C20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +276,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0AC754D20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift in Sources */,
+				A0522CF520A19C4D00EF5923 /* Logger.swift in Sources */,
+				A0522CFC20A1AC9200EF5923 /* CTServiceFactory.swift in Sources */,
+				A0AC754020A1463E00DDAF44 /* CTDiskCacheCenter.swift in Sources */,
+				A0522D0120A1BDA000EF5923 /* DemoService.swift in Sources */,
+				A0AC754720A16BCF00DDAF44 /* CTNetworkingDefines.swift in Sources */,
+				A0AC754220A1465B00DDAF44 /* CTMemoryCacheDataCenter.swift in Sources */,
+				A0AC753A20A0ACD100DDAF44 /* CTURLResponse.swift in Sources */,
+				A0AC754A20A16C4C00DDAF44 /* CTServiceProtocol.swift in Sources */,
+				A0AC754520A15CB700DDAF44 /* CTMemoryCacheRecord.swift in Sources */,
 				A0AC752620A0A0AD00DDAF44 /* ViewController.swift in Sources */,
+				A0AC753C20A145B100DDAF44 /* CTCacheCenter.swift in Sources */,
+				A0522CFA20A1A22800EF5923 /* CTURLRequest.swift in Sources */,
 				A0AC752420A0A0AD00DDAF44 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
