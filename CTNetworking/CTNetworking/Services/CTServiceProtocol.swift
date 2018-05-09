@@ -11,6 +11,7 @@ import UIKit
 protocol CTServiceProtocol:NSObjectProtocol {
     
     var apiEnvironment:CTServiceAPIEnvironment { get set }
-    func request(params:Dictionary<String, Any>,methodName:String,requestType:CTAPIManagerRequestType)
+    func request(params:Dictionary<String, Any>,methodName:String,requestType:CTAPIManagerRequestType) -> NSURLRequest?
     func result(responseData:Data,response:URLResponse,request:URLRequest)
+    
 }
