@@ -23,7 +23,8 @@ class CTMemoryCacheRecord {
     var isEmpty:Bool {
         return self.content == nil
     }
-    init(content:Data) {
+    
+    func updateContent(content:Data) {
         self.content = content
     }
 }

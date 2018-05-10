@@ -11,6 +11,10 @@ import AFNetworking
 
 class CTApiProxy {
     
+    static let kCTApiProxyValidateResultKeyResponseJSONObject = "kCTApiProxyValidateResultKeyResponseJSONObject"
+    static let kCTApiProxyValidateResultKeyResponseJSONString = "kCTApiProxyValidateResultKeyResponseJSONString"
+    static let kCTApiProxyValidateResultKeyResponseData = "kCTApiProxyValidateResultKeyResponseData"
+    
     typealias CTCallback = ((CTURLResponse)->Void)
     
     static let shareInstance = CTApiProxy()
@@ -41,7 +45,16 @@ class CTApiProxy {
         }
     }
     
-    func callApi(request:NSURLRequest,success:CTCallback,fail:CTCallback) -> Int {
+    /** 这个函数存在的意义在于，如果将来要把AFNetworking换掉，只要修改这个函数的实现即可。 */
+    func callApi(request:CTURLRequest,success:CTCallback,fail:CTCallback) -> Int {
+        var dataTask:URLSessionDataTask! = nil
+        dataTask = self.sessionManager.dataTask(with: request.urlRequest!) { (response, responseData, error) in
+            let requestId  = dataTask.taskIdentifier
+            self.dispatchTable.removeValue(forKey: requestId)
+            let result = request.service?.result(responseData: responseData as! Data, response: response, request: request)
+            let CTResponse = CTURLResponse(responseString: (result![CTApiProxy.kCTApiProxyValidateResultKeyResponseJSONString] as? String)!, requestId: requestId, request: request, responsContent: (result![CTApiProxy.kCTApiProxyValidateResultKeyResponseJSONObject] as? Dictionary<String,Any>)!, error: error!)
+            
+        }
         return 0
     }
     

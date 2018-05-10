@@ -26,6 +26,16 @@ class CTMemoryCacheDataCenter {
         return result
     }
     
+    func saveCache(response:CTURLResponse,key:String,cacheTime:TimeInterval) {
+        var record = self.cache.object(forKey: key as AnyObject) as? CTMemoryCacheRecord
+        if record == nil {
+            record = CTMemoryCacheRecord()
+        }
+        record?.cacheTime = cacheTime
+        record?.content = try? JSONSerialization.data(withJSONObject: response.content as Any, options: JSONSerialization.WritingOptions.prettyPrinted)
+        self.cache.setObject(record!, forKey: key as AnyObject)
+    }
+    
     func cleanAll() {
         self.cache.removeAllObjects()
     }

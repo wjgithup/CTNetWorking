@@ -22,7 +22,7 @@ class CTURLResponse: NSObject {
     var contentString:String?
     var content:Dictionary<String,Any>?
     var requestId:Int?
-    var request:NSURLRequest?
+    var request:CTURLRequest?
     var responseData:Data?
     var errorMessage:String?
     
@@ -46,12 +46,25 @@ class CTURLResponse: NSObject {
         self.isCache = true
     }
     
+    init(responseString:String,requestId:Int,request:CTURLRequest,responsContent:Dictionary<String,Any>,error:Error) {
+        super.init()
+        self.contentString = responseString
+        self.requestId = requestId
+        self.request = request
+        self.acturlRequestParams = request.actualRequestParams
+        self.originRequestParams = request.originRequestParams
+        self.isCache = false
+        self.status = self.getResponseStatus(error: error)
+        self.content = responsContent
+        self.errorMessage = String(describing: error)
+    }
+    
     //MARK private Methods
-    func getResponseStatus(error:NSError?)->CTURLResponseStatus {
+    func getResponseStatus(error:Error?)->CTURLResponseStatus {
         guard let err = error else {
             return .CTURLResponseStatusSuccess
         }
-        switch err.code {
+        switch err._code {
         case NSURLErrorTimedOut:
             return .CTURLResponseStatusErrorTimeout
         case NSURLErrorCancelled:

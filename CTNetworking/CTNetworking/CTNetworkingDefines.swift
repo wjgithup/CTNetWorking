@@ -36,6 +36,12 @@ public enum CTAPIManagerErrorType {
     CTAPIManagerErrorTypeDownGrade       // APIManager被降级了
 }
 
+public enum CTAPIManagerCachePolicy {
+    case CTAPIManagerCachePolicyNoCache,
+    CTAPIManagerCachePolicyMemory,
+    CTAPIManagerCachePolicyDisk
+}
+
 protocol CTAPIManagerCallBackDelegate:NSObjectProtocol {
     func callApiDidSuccess(manager:CTAPIBaseManager)
     func callApiDidFailed(manager:CTAPIBaseManager)
@@ -60,7 +66,7 @@ protocol CTAPIManagerDataReformer:NSObjectProtocol {
     @objc optional func beforePerformFail(manager:CTAPIBaseManager,response:CTURLResponse) -> Bool
     @objc optional func afterPerformFail(manager:CTAPIBaseManager,response:CTURLResponse) -> Bool
     @objc optional func shouldCallApi(manager:CTAPIBaseManager,params:Dictionary<String,Any>) -> Bool
-    @objc optional func afterCallAPI(manager:CTAPIBaseManager,params:Dictionary<String,Any>) -> Bool
+    @objc optional func afterCallAPI(manager:CTAPIBaseManager,params:Dictionary<String,Any>)
     @objc optional func didReceiveResponse(manager:CTAPIBaseManager,response:CTURLResponse) -> Bool
 }
 

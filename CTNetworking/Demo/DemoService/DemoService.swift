@@ -13,19 +13,23 @@ class DemoService: NSObject,CTServiceProtocol {
     
     var apiEnvironment: CTServiceAPIEnvironment
     
-    func request(params: Dictionary<String, Any>, methodName: String, requestType: CTAPIManagerRequestType) -> NSURLRequest? {
+    func request(params: Dictionary<String, Any>, methodName: String, requestType: CTAPIManagerRequestType) -> CTURLRequest? {
         if requestType == .CTAPIManagerRequestTypeGet {
             let urlstring = self.baseUrl! + methodName
             let tsString = NSUUID().uuidString
             let md5Hash = (tsString + self.privateKey! + self.publicKey!).md5
             let request = self.httpRequestSerializer.request(withMethod: "GET", urlString: urlstring, parameters: ["apikey":self.publicKey,"ts":tsString,"hash":md5Hash], error: nil)
-            return request
+            let ctRequest = CTURLRequest()
+            ctRequest.urlRequest = request as URLRequest
+            ctRequest.actualRequestParams = params
+            return ctRequest
         }
         return nil
     }
     
-    func result(responseData: Data, response: URLResponse, request: URLRequest) {
-        
+    func result(responseData: Data, response: URLResponse, request: CTURLRequest) -> Dictionary<String, Any>?  {
+        let jsonobj = try? JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions(rawValue: 0))
+        return [CTApiProxy.kCTApiProxyValidateResultKeyResponseData:responseData,CTApiProxy.kCTApiProxyValidateResultKeyResponseJSONObject: jsonobj ?? "",CTApiProxy.kCTApiProxyValidateResultKeyResponseJSONString:String.init(data: responseData, encoding: String.Encoding.utf8) ?? ""]
     }
     
     required override init() {

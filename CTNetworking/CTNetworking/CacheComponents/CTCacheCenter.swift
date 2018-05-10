@@ -10,17 +10,44 @@ import UIKit
 
 class CTCacheCenter {
     
-    let shareInstance = CTCacheCenter()
+    static let shareInstance = CTCacheCenter()
     private init() {}
     
     let diskCacheCenter = CTDiskCacheCenter.shareInstance
     let memoryCacheCenter = CTMemoryCacheDataCenter.shareInstance
     
-    func fetchDiskCache(serviceIdentifier:String,methodName:String,params:Dictionary<String,Any>) -> CTURLResponse {
+    func fetchDiskCache(serviceIdentifier:String,methodName:String,params:Dictionary<String,Any>) -> CTURLResponse? {
         let keyString = self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params)
         let response = self.diskCacheCenter.fetchCachedRecord(key: keyString)
         response?.logString = Logger.logDebugInfoResponse(response: response!, methodName: methodName, service: CTServiceFactory.shareInstance.getService(identifier: serviceIdentifier), params: params)
-        return response!
+        return response
+    }
+    
+    func fetchMemoryCache(serviceIdentifier:String,methodName:String,params:Dictionary<String,Any>) -> CTURLResponse? {
+        let keyString = self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params)
+        let response = self.memoryCacheCenter.fetchCachedRecord(key: keyString)
+        response?.logString = Logger.logDebugInfoResponse(response: response!, methodName: methodName, service: CTServiceFactory.shareInstance.getService(identifier: serviceIdentifier), params: params)
+        return response
+    }
+    
+    func saveMemoryCache(response:CTURLResponse,serviceIdentifier:String,methodName:String,cacheTime:TimeInterval) {
+        guard let params = response.originRequestParams else {
+            return
+        }
+        if response.originRequestParams == nil || response.content == nil {
+            return
+        }
+        self.memoryCacheCenter.saveCache(response: response, key: self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params), cacheTime: cacheTime)
+    }
+    
+    func saveDiskCache(response:CTURLResponse,serviceIdentifier:String,methodName:String,cacheTime:TimeInterval) {
+        guard let params = response.originRequestParams else {
+            return
+        }
+        if response.originRequestParams == nil || response.content == nil {
+            return
+        }
+        self.diskCacheCenter.saveCache(response: response, key: self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params), cacheTime: cacheTime)
     }
     
     func getKey(serviceIdentifier:String,methodName:String,requestParams:Dictionary<String,Any>) -> String {
