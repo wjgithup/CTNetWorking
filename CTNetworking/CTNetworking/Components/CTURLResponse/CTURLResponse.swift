@@ -46,7 +46,7 @@ class CTURLResponse: NSObject {
         self.isCache = true
     }
     
-    init(responseString:String,requestId:Int,request:CTURLRequest,responsContent:Dictionary<String,Any>,error:Error) {
+    init(responseString:String,requestId:Int,request:CTURLRequest,responsContent:Dictionary<String,Any>,error:Error?) {
         super.init()
         self.contentString = responseString
         self.requestId = requestId

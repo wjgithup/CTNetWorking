@@ -52,12 +52,12 @@ protocol CTAPIManagerParamSource:NSObjectProtocol {
 }
 
 protocol CTAPIManagerValidator:NSObjectProtocol {
-    func isBackDataCorrect(manager:CTAPIBaseManager,callBackData:Dictionary<String,Any>) -> CTAPIManagerErrorType
-    func isParamsDataCorrect(manager:CTAPIBaseManager,params:Dictionary<String,Any>) -> CTAPIManagerErrorType
+    func isBackDataCorrect(manager:CTAPIBaseManager,callBackData:Dictionary<String,Any>?) -> CTAPIManagerErrorType
+    func isParamsDataCorrect(manager:CTAPIBaseManager,params:Dictionary<String,Any>?) -> CTAPIManagerErrorType
 }
 
 protocol CTAPIManagerDataReformer:NSObjectProtocol {
-    func reformer(manager:CTAPIBaseManager,data:Dictionary<String, Any>) -> AnyObject?
+    func reformer(manager:CTAPIBaseManager,data:Dictionary<String, Any>?) -> AnyObject?
 }
 
 @objc protocol CTAPIManagerInterceptor:NSObjectProtocol {
@@ -65,8 +65,8 @@ protocol CTAPIManagerDataReformer:NSObjectProtocol {
     @objc optional func afterPerformSuccess(manager:CTAPIBaseManager,response:CTURLResponse) -> Bool
     @objc optional func beforePerformFail(manager:CTAPIBaseManager,response:CTURLResponse) -> Bool
     @objc optional func afterPerformFail(manager:CTAPIBaseManager,response:CTURLResponse) -> Bool
-    @objc optional func shouldCallApi(manager:CTAPIBaseManager,params:Dictionary<String,Any>) -> Bool
-    @objc optional func afterCallAPI(manager:CTAPIBaseManager,params:Dictionary<String,Any>)
+    @objc optional func shouldCallApi(manager:CTAPIBaseManager,params:Dictionary<String,Any>?) -> Bool
+    @objc optional func afterCallAPI(manager:CTAPIBaseManager,params:Dictionary<String,Any>?) -> Bool
     @objc optional func didReceiveResponse(manager:CTAPIBaseManager,response:CTURLResponse) -> Bool
 }
 
@@ -75,6 +75,6 @@ protocol CTAPIManagerDataReformer:NSObjectProtocol {
     func serviceIdentifier() ->String
     func requestType() -> CTAPIManagerRequestType
     @objc optional func cleanData()
-    @objc optional func reformParams(params:Dictionary<String,Any>)->Dictionary<String,Any>
-    @objc optional func loadData(params:Dictionary<String,Any>)
+    @objc optional func reformParams(params:Dictionary<String,Any>?)->Dictionary<String,Any>?
+    @objc optional func loadData(params:Dictionary<String,Any>?)
 }

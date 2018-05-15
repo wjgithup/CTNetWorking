@@ -10,8 +10,8 @@ import UIKit
 
 extension Dictionary {
     
-    func getUrlParamsString() -> String{
-        var resultString:String! = nil
+    func getUrlParamsString() -> String?{
+        var resultString:String?
         for i in 0..<self.count {
             var string:String! = nil
             if i == 0 {
@@ -19,7 +19,7 @@ extension Dictionary {
             } else {
                 string = "&" + (Array(self.keys)[i] as! String) + "=" + (Array(self.keys)[i] as! String)
             }
-            resultString.append(string)
+            resultString?.append(string)
         }
         return resultString
     }

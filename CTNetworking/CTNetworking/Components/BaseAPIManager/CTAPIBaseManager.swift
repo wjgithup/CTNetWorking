@@ -34,12 +34,13 @@ class CTAPIBaseManager: NSObject {
         return array
     }()
     
+    private var loading:Bool?
     var isLoading:Bool {
         get {
             return self.requestList?.count != 0
         }
         set {
-            self.isLoading = newValue
+            loading = newValue
         }
     }
     
@@ -68,22 +69,26 @@ class CTAPIBaseManager: NSObject {
         guard requestId != nil else {
             return
         }
-        self.requestList?.remove(at: (self.requestList?.index(of: requestId!))!)
+        let index = (self.requestList?.index(of: requestId!))!
+        self.requestList?.remove(at: index)
     }
     //解析数据
-    func fetchData(reformer:CTAPIManagerDataReformer) -> AnyObject?{
+    func fetchData(reformer:CTAPIManagerDataReformer?) -> AnyObject?{
+        guard reformer != nil else {
+            return self.fetchedRawData
+        }
         var resultData:AnyObject?
-        resultData = reformer.reformer(manager: self, data: self.fetchedRawData as! Dictionary<String, Any>)
+        resultData = reformer!.reformer(manager: self, data: self.fetchedRawData as? Dictionary<String, Any>)
         return resultData
     }
     
     func loadData() -> Int {
         let params = self.paramSource?.params(manager: self)
-        let id = self.loadData(params: params!)
+        let id = self.loadData(params: params)
         return id
     }
     
-    func loadData(params:Dictionary<String,Any>) -> Int {
+    func loadData(params:Dictionary<String,Any>?) -> Int {
         let requestId = 0
         let reformedParams = self.reformParams(params: params)
         guard self.shouldCallApi(params: params) else {
@@ -130,9 +135,9 @@ class CTAPIBaseManager: NSObject {
             self.failedOnCallApi(response: response, errorType: errorType)
         }
         self.requestList?.append(requestID)
-        var afparams = reformedParams
+        var afparams = reformedParams ?? Dictionary()
         afparams[CTAPIBaseManager.kCTAPIBaseManagerRequestID] = requestID
-        self.afterCallApi(params: afparams)
+        let _ = self.afterCallApi(params: afparams)
         return requestID
     }
     
@@ -206,7 +211,7 @@ class CTAPIBaseManager: NSObject {
     
     //Mark method for child
     
-    func cleanData() {
+    @objc func cleanData() {
         self.fetchedRawData = nil
         self.errorType = .CTAPIManagerErrorTypeDefault
     }
@@ -225,15 +230,21 @@ class CTAPIBaseManager: NSObject {
      这就是decorate pattern
      */
     func beforePerformSuccess(response:CTURLResponse) -> Bool {
-        guard  self.interceptor is CTAPIBaseManager else {
-            return (self.interceptor?.beforePerformSuccess?(manager: self, response: response))!
+        guard let interceptor = self.interceptor  else {
+            return true
+        }
+        guard  interceptor is CTAPIBaseManager else {
+            return (interceptor.beforePerformSuccess?(manager: self, response: response))!
         }
         return true
     }
     
     func afterPerformSuccess(response:CTURLResponse) ->Bool {
-        guard self.interceptor is CTAPIBaseManager  else {
-            return (self.interceptor?.afterPerformSuccess?(manager: self, response: response))!
+        guard let interceptor = self.interceptor  else {
+            return true
+        }
+        guard interceptor is CTAPIBaseManager  else {
+            return (interceptor.afterPerformSuccess?(manager: self, response: response))!
         }
         return true
     }
@@ -253,7 +264,7 @@ class CTAPIBaseManager: NSObject {
     }
     //如果需要在调用API之前额外添加一些参数，比如pageNumber和pageSize之类的就在这里添加
     //子类中覆盖这个函数的时候就不需要调用[super reformParams:params]了
-    @objc func reformParams(params:Dictionary<String,Any>)->Dictionary<String,Any> {
+    @objc func reformParams(params:Dictionary<String,Any>?)->Dictionary<String,Any>? {
         let selfIMP = self.method(for: #selector(CTAPIBaseManager.reformParams))
         let childIMP = (self.child as? NSObject)?.method(for: #selector(CTAPIBaseManager.reformParams))
         if selfIMP == childIMP {
@@ -265,17 +276,27 @@ class CTAPIBaseManager: NSObject {
         }
     }
     
-    func shouldCallApi(params:Dictionary<String,Any>) ->Bool {
-        guard let _ = self.interceptor as? CTAPIBaseManager else {
-            return (self.interceptor?.shouldCallApi!(manager: self, params: params))!
+    func shouldCallApi(params:Dictionary<String,Any>?) ->Bool {
+        guard params != nil else {
+            return true
+        }
+        guard let interceptor = self.interceptor else {
+            return true
+        }
+        guard let _ = interceptor as? CTAPIBaseManager else {
+            return (interceptor.shouldCallApi!(manager: self, params: params))
         }
         return true
     }
     
-    func afterCallApi(params:Dictionary<String,Any>) {
-        guard let _ = self.interceptor as? CTAPIBaseManager else {
-           return (self.interceptor?.afterCallAPI!(manager: self, params: params))!
+    func afterCallApi(params:Dictionary<String,Any>?) -> Bool {
+        guard let interceptor = self.interceptor else {
+            return true
         }
+        guard let _ = interceptor as? CTAPIBaseManager else {
+            return (interceptor.afterCallAPI!(manager: self, params: params))
+        }
+        return true
     }
     
     deinit {

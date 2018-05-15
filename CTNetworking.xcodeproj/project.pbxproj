@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3C2F9A62E433694889AAB041 /* Pods_CTNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F61CB53A5EC4A4E72D8912 /* Pods_CTNetworking.framework */; };
+		A04CAC8620A97C6700080008 /* DemoAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CAC8520A97C6700080008 /* DemoAPIManager.swift */; };
+		A04CAC8920A9828100080008 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E7E1B420A2ECCB00DCD250 /* AFNetworking.framework */; };
+		A04CAC8A20A9828100080008 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A0E7E1B420A2ECCB00DCD250 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A0522CF520A19C4D00EF5923 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0522CF420A19C4D00EF5923 /* Logger.swift */; };
 		A0522CFA20A1A22800EF5923 /* CTURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0522CF920A1A22800EF5923 /* CTURLRequest.swift */; };
 		A0522CFC20A1AC9200EF5923 /* CTServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0522CFB20A1AC9200EF5923 /* CTServiceFactory.swift */; };
@@ -26,13 +29,27 @@
 		A0AC754A20A16C4C00DDAF44 /* CTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC754920A16C4C00DDAF44 /* CTServiceProtocol.swift */; };
 		A0AC754D20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC754C20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift */; };
 		A0E7E1AD20A2E22A00DCD250 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7E1AC20A2E22A00DCD250 /* String+MD5.swift */; };
-		A0E7E1B520A2ECCB00DCD250 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E7E1B420A2ECCB00DCD250 /* AFNetworking.framework */; };
 		A0E7E1B820A2F1BB00DCD250 /* CTAPIBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7E1B720A2F1BB00DCD250 /* CTAPIBaseManager.swift */; };
 		A0E7E1BB20A2FC4000DCD250 /* CTApiProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7E1BA20A2FC4000DCD250 /* CTApiProxy.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A04CAC8B20A9828100080008 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A04CAC8A20A9828100080008 /* AFNetworking.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		76F61CB53A5EC4A4E72D8912 /* Pods_CTNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CTNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A04CAC8520A97C6700080008 /* DemoAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAPIManager.swift; sourceTree = "<group>"; };
 		A0522CF420A19C4D00EF5923 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A0522CF920A1A22800EF5923 /* CTURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTURLRequest.swift; sourceTree = "<group>"; };
 		A0522CFB20A1AC9200EF5923 /* CTServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTServiceFactory.swift; sourceTree = "<group>"; };
@@ -67,7 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C2F9A62E433694889AAB041 /* Pods_CTNetworking.framework in Frameworks */,
-				A0E7E1B520A2ECCB00DCD250 /* AFNetworking.framework in Frameworks */,
+				A04CAC8920A9828100080008 /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,17 +128,11 @@
 		A0522CFD20A1BD6A00EF5923 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				A0522CFF20A1BD8A00EF5923 /* DemoService */,
+				A0522D0020A1BDA000EF5923 /* DemoService.swift */,
+				A04CAC8520A97C6700080008 /* DemoAPIManager.swift */,
+				A0AC752520A0A0AD00DDAF44 /* ViewController.swift */,
 			);
 			path = Demo;
-			sourceTree = "<group>";
-		};
-		A0522CFF20A1BD8A00EF5923 /* DemoService */ = {
-			isa = PBXGroup;
-			children = (
-				A0522D0020A1BDA000EF5923 /* DemoService.swift */,
-			);
-			path = DemoService;
 			sourceTree = "<group>";
 		};
 		A0AC751720A0A0AD00DDAF44 = {
@@ -148,7 +159,6 @@
 				A0522CFD20A1BD6A00EF5923 /* Demo */,
 				A0AC753520A0A9A500DDAF44 /* CTNetworking */,
 				A0AC752320A0A0AD00DDAF44 /* AppDelegate.swift */,
-				A0AC752520A0A0AD00DDAF44 /* ViewController.swift */,
 				A0AC752720A0A0AD00DDAF44 /* Main.storyboard */,
 				A0AC752A20A0A0AD00DDAF44 /* Assets.xcassets */,
 				A0AC752C20A0A0AD00DDAF44 /* LaunchScreen.storyboard */,
@@ -280,6 +290,7 @@
 				A0AC751E20A0A0AD00DDAF44 /* Resources */,
 				4E1BBDE0FAB150FFE5B826C7 /* [CP] Embed Pods Frameworks */,
 				0B1B42D9BD4C634E6D91D24B /* [CP] Copy Pods Resources */,
+				A04CAC8B20A9828100080008 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -399,6 +410,7 @@
 				A0AC754D20A18BA700DDAF44 /* Dictionary+NetworkingMethods.swift in Sources */,
 				A0522CF520A19C4D00EF5923 /* Logger.swift in Sources */,
 				A0522CFC20A1AC9200EF5923 /* CTServiceFactory.swift in Sources */,
+				A04CAC8620A97C6700080008 /* DemoAPIManager.swift in Sources */,
 				A0AC754020A1463E00DDAF44 /* CTDiskCacheCenter.swift in Sources */,
 				A0522D0120A1BDA000EF5923 /* DemoService.swift in Sources */,
 				A0AC754720A16BCF00DDAF44 /* CTNetworkingDefines.swift in Sources */,

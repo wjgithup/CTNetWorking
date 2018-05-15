@@ -13,9 +13,9 @@ class DemoService: NSObject,CTServiceProtocol {
     
     var apiEnvironment: CTServiceAPIEnvironment
     
-    func request(params: Dictionary<String, Any>, methodName: String, requestType: CTAPIManagerRequestType) -> CTURLRequest? {
+    func request(params: Dictionary<String, Any>?, methodName: String, requestType: CTAPIManagerRequestType) -> CTURLRequest? {
         if requestType == .CTAPIManagerRequestTypeGet {
-            let urlstring = self.baseUrl! + methodName
+            let urlstring = self.baseUrl! + "/" + methodName
             let tsString = NSUUID().uuidString
             let md5Hash = (tsString + self.privateKey! + self.publicKey!).md5
             let request = self.httpRequestSerializer.request(withMethod: "GET", urlString: urlstring, parameters: ["apikey":self.publicKey,"ts":tsString,"hash":md5Hash], error: nil)

@@ -16,14 +16,14 @@ class CTCacheCenter {
     let diskCacheCenter = CTDiskCacheCenter.shareInstance
     let memoryCacheCenter = CTMemoryCacheDataCenter.shareInstance
     
-    func fetchDiskCache(serviceIdentifier:String,methodName:String,params:Dictionary<String,Any>) -> CTURLResponse? {
+    func fetchDiskCache(serviceIdentifier:String,methodName:String,params:Dictionary<String,Any>?) -> CTURLResponse? {
         let keyString = self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params)
         let response = self.diskCacheCenter.fetchCachedRecord(key: keyString)
         response?.logString = Logger.logDebugInfoResponse(response: response!, methodName: methodName, service: CTServiceFactory.shareInstance.getService(identifier: serviceIdentifier), params: params)
         return response
     }
     
-    func fetchMemoryCache(serviceIdentifier:String,methodName:String,params:Dictionary<String,Any>) -> CTURLResponse? {
+    func fetchMemoryCache(serviceIdentifier:String,methodName:String,params:Dictionary<String,Any>?) -> CTURLResponse? {
         let keyString = self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params)
         let response = self.memoryCacheCenter.fetchCachedRecord(key: keyString)
         response?.logString = Logger.logDebugInfoResponse(response: response!, methodName: methodName, service: CTServiceFactory.shareInstance.getService(identifier: serviceIdentifier), params: params)
@@ -50,8 +50,8 @@ class CTCacheCenter {
         self.diskCacheCenter.saveCache(response: response, key: self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params), cacheTime: cacheTime)
     }
     
-    func getKey(serviceIdentifier:String,methodName:String,requestParams:Dictionary<String,Any>) -> String {
-        let string = serviceIdentifier + methodName + requestParams.getUrlParamsString()
+    func getKey(serviceIdentifier:String,methodName:String,requestParams:Dictionary<String,Any>?) -> String {
+        let string = serviceIdentifier + methodName + (requestParams?.getUrlParamsString())!
         return string
     }
 }

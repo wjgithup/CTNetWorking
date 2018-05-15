@@ -12,7 +12,7 @@ protocol CTServiceProtocol:NSObjectProtocol {
     
     var apiEnvironment:CTServiceAPIEnvironment { get set }
     
-    func request(params:Dictionary<String, Any>,methodName:String,requestType:CTAPIManagerRequestType) -> CTURLRequest?
+    func request(params:Dictionary<String, Any>?,methodName:String,requestType:CTAPIManagerRequestType) -> CTURLRequest?
     
     func result(responseData:Data,response:URLResponse,request:CTURLRequest) -> Dictionary<String, Any>?
     
