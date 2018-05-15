@@ -40,13 +40,15 @@ class Logger {
     static func logDebugInfoResponse(response:CTURLResponse,methodName:String,service:CTServiceProtocol,params:Dictionary<String,Any>?) -> String {
         
         #if DEBUG
-            var logString:String! = nil
+            var logString:String = ""
             logString.append("\n\n=========================================\nCached Response                             \n=========================================\n\n")
             logString.append("API Name:\t\t"+methodName+"\n")
             logString.append("Service:"+NSStringFromClass(type(of: service))+"\n")
-            logString.append("Params:"+(params?.jsonString())!+"\n")
-            logString.append("Origin Params:"+(response.originRequestParams?.jsonString()!)!+"\n")
-            logString.append("Actual Params:"+(response.acturlRequestParams?.jsonString()!)!+"\n")
+            if response.originRequestParams != nil && response.acturlRequestParams != nil && params != nil  {
+                logString.append("Params:"+(params?.jsonString())!+"\n")
+                logString.append("Origin Params:"+(response.originRequestParams?.jsonString()!)!+"\n")
+                logString.append("Actual Params:"+(response.acturlRequestParams?.jsonString()!)!+"\n")
+            }
             logString.append("Content:"+(response.content?.jsonString()!)!+"\n")
             logString.append("\n\n=========================================\nResponse End\n=========================================\n\n")
         #endif

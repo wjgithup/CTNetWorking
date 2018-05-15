@@ -14,6 +14,7 @@ class DemoAPIManager: CTAPIBaseManager,CTAPIManager,CTAPIManagerValidator,CTAPIM
         super.init()
         self.paramSource = self
         self.validator = self
+        self.cachePolicy = .CTAPIManagerCachePolicyDisk
     }
     
     func methodName() -> String {

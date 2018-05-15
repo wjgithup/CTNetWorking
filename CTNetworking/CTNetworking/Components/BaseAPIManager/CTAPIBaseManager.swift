@@ -69,6 +69,9 @@ class CTAPIBaseManager: NSObject {
         guard requestId != nil else {
             return
         }
+        if self.requestList?.count == 0 {
+            return
+        }
         let index = (self.requestList?.index(of: requestId!))!
         self.requestList?.remove(at: index)
     }
@@ -100,8 +103,12 @@ class CTAPIBaseManager: NSObject {
             return requestId
         }
         var response:CTURLResponse! = nil
-        if self.cachePolicy == CTAPIManagerCachePolicy.CTAPIManagerCachePolicyMemory && !self.shouldIgnoreCache {
+        if (self.cachePolicy == CTAPIManagerCachePolicy.CTAPIManagerCachePolicyMemory || self.cachePolicy == CTAPIManagerCachePolicy.CTAPIManagerCachePolicyDisk)  && !self.shouldIgnoreCache {
             response = CTCacheCenter.shareInstance.fetchMemoryCache(serviceIdentifier: (self.child?.serviceIdentifier())!, methodName: (self.child?.methodName())!, params: reformedParams)
+        }
+        if response != nil {
+            self.successOnCallApi(response: response)
+            return 0
         }
         if self.cachePolicy == CTAPIManagerCachePolicy.CTAPIManagerCachePolicyDisk && !self.shouldIgnoreCache {
             response = CTCacheCenter.shareInstance.fetchDiskCache(serviceIdentifier: (self.child?.serviceIdentifier())!, methodName: (self.child?.methodName())!, params: params)
@@ -174,7 +181,8 @@ class CTAPIBaseManager: NSObject {
             CTCacheCenter.shareInstance.saveMemoryCache(response: response, serviceIdentifier: (self.child?.serviceIdentifier())!, methodName: (self.child?.methodName())!, cacheTime: self.memoryCacheSecond)
         }
         if self.cachePolicy == .CTAPIManagerCachePolicyDisk {
-            CTCacheCenter.shareInstance.saveDiskCache(response: response, serviceIdentifier: (self.child?.serviceIdentifier())!, methodName: (self.child?.methodName())!, cacheTime: self.diskCacheSecond)
+            CTCacheCenter.shareInstance.saveMemoryCache(response: response, serviceIdentifier: (self.child?.serviceIdentifier())!, methodName: (self.child?.methodName())!, cacheTime: self.memoryCacheSecond)
+                CTCacheCenter.shareInstance.saveDiskCache(response: response, serviceIdentifier: (self.child?.serviceIdentifier())!, methodName: (self.child?.methodName())!, cacheTime: self.diskCacheSecond)
         }
     }
     

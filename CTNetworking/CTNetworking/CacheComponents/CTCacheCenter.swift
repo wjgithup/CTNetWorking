@@ -31,27 +31,24 @@ class CTCacheCenter {
     }
     
     func saveMemoryCache(response:CTURLResponse,serviceIdentifier:String,methodName:String,cacheTime:TimeInterval) {
-        guard let params = response.originRequestParams else {
+        if  response.content == nil {
             return
         }
-        if response.originRequestParams == nil || response.content == nil {
-            return
-        }
-        self.memoryCacheCenter.saveCache(response: response, key: self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params), cacheTime: cacheTime)
+        self.memoryCacheCenter.saveCache(response: response, key: self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: response.originRequestParams), cacheTime: cacheTime)
     }
     
     func saveDiskCache(response:CTURLResponse,serviceIdentifier:String,methodName:String,cacheTime:TimeInterval) {
-        guard let params = response.originRequestParams else {
+        if  response.content == nil {
             return
         }
-        if response.originRequestParams == nil || response.content == nil {
-            return
-        }
-        self.diskCacheCenter.saveCache(response: response, key: self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: params), cacheTime: cacheTime)
+        self.diskCacheCenter.saveCache(response: response, key: self.getKey(serviceIdentifier: serviceIdentifier, methodName: methodName, requestParams: response.originRequestParams), cacheTime: cacheTime)
     }
     
     func getKey(serviceIdentifier:String,methodName:String,requestParams:Dictionary<String,Any>?) -> String {
-        let string = serviceIdentifier + methodName + (requestParams?.getUrlParamsString())!
+        guard let parStr = requestParams?.getUrlParamsString() else {
+            return serviceIdentifier + methodName
+        }
+        let string = serviceIdentifier + methodName + parStr
         return string
     }
 }

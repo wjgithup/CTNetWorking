@@ -34,7 +34,7 @@ class CTDiskCacheCenter {
         let cacheTime = fetchedContent!!["cacheTime"] as? Int
         var response:CTURLResponse! = nil
         if Int(timeInterval) < cacheTime!  {
-            response = CTURLResponse(data: try! JSONSerialization.jsonObject(with: fetchedContent!!["content"] as! Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Data)
+            response = CTURLResponse(data: try! JSONSerialization.data(withJSONObject: fetchedContent!!["content"] ?? "", options: JSONSerialization.WritingOptions.prettyPrinted)) as CTURLResponse
         } else {
             UserDefaults.standard.removeObject(forKey: actualKey)
             UserDefaults.standard.synchronize()
@@ -46,7 +46,7 @@ class CTDiskCacheCenter {
         guard let content = response.content else {
             return
         }
-        let data = try? JSONSerialization.data(withJSONObject: ["content":content,"lastUpdateTime":NSDate().timeIntervalSince1970], options: JSONSerialization.WritingOptions(rawValue: 0))
+        let data = try? JSONSerialization.data(withJSONObject: ["content":content,"lastUpdateTime":Int(NSDate().timeIntervalSince1970),"cacheTime":Int(cacheTime)], options: JSONSerialization.WritingOptions(rawValue: 0))
         guard let savedata = data else {
             return
         }
